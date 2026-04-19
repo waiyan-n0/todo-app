@@ -24,9 +24,27 @@ Database Integration: Integrating a backend (Firebase or SQL) to provide persist
 PWA Support: Turning the app into a Progressive Web App for mobile installation.
 
 ## 💻 Installation & Setup
-
 # 1. Clone the Repository
 ```bash
 git clone https://github.com/waiyan-n0/todo-app.git
+```
+# 2. Navigate to the Project Directory
+```bash
+cd todo-app
+```
+# 3. Install Dependencies
+```bash
+npm install
+```
+# 4. Run the Development Server
+```bash
+npm run dev
+```
+## 5. 👤 Author
+Wai Yan Naing
+Computer Science Major at UCSTGO
+Passionate about Full-stack Development
 
-# 2. nagivate the Project Directory
+## 📝 License
+
+This project is open-source and intended for educational purposes.
