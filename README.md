@@ -42,7 +42,9 @@ npm run dev
 ```
 ## 5. 👤 Author
 Wai Yan Naing
+
 Computer Science Major at UCSTGO
+
 Passionate about Full-stack Development
 
 ## 📝 License
