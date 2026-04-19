@@ -1,18 +1,32 @@
-# React + Vite
+### 📝 Modern Notepad App (React Learning Journey)
+This project serves as a practical application of React.js concepts, focusing on state management and responsive UI design.
+##🚀 Current Features
+✅ Full CRUD Functionality: Create, Read, Update, and Delete tasks effortlessly.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+✅ Smart Reminder System: Set specific dates and times for tasks with an integrated date-time picker.
 
-Currently, two official plugins are available:
+✅ Responsive Layout: Optimized for 💻 Laptops and 📱 Mobile screens.
+##Tech Stack
+Frontend: React.js (Vite)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Styling: Tailwind CSS
 
-## React Compiler
+Icons: Heroicons / SVG
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+State: React Context API + useReducer
+##🚧 Roadmap (Work in Progress)
+I am actively developing this project with the following milestones in mind:
 
-Note: This will impact Vite dev & build performances.
+Local Storage Persistence: Implementing browser storage so data remains after a page refresh.
 
-## Expanding the ESLint configuration
+Database Integration: Integrating a backend (Firebase or SQL) to provide persistent user data.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+PWA Support: Turning the app into a Progressive Web App for mobile installation.
+
+## 💻 Installation & Setup
+
+# 1. Clone the Repository
+```bash
+git clone https://github.com/waiyan-n0/todo-app.git
+
+# 2. nagivate the Project Directory
