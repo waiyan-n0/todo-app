@@ -1,5 +1,8 @@
 ### 📝 Modern Notepad App (React Learning Journey)
 This project serves as a practical application of React.js concepts, focusing on state management and responsive UI design.
+
+## Note that : I'm still working on this project.
+
 ## 🚀 Current Features
 ✅ Full CRUD Functionality: Create, Read, Update, and Delete tasks effortlessly.
 
@@ -13,7 +16,7 @@ Styling: Tailwind CSS
 
 Icons: Heroicons / SVG
 
-State: React Context API + useReducer
+State: React Context API + useReducer + useRef 
 ## 🚧 Roadmap (Work in Progress)
 I am actively developing this project with the following milestones in mind:
 
