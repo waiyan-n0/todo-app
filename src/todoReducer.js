@@ -1,5 +1,7 @@
 export const todoReducer = (state, action) => {
     switch (action.type) {
+        case 'SET_SEARCH_TASK':
+            return {...state, searchInput: action.payload};
         case 'ADD_TASK':
             return {...state,tasks:[action.payload, ...state.tasks]};
         case 'REMOVE_TASK':
@@ -8,7 +10,7 @@ export const todoReducer = (state, action) => {
         case 'START_EDIT_TASK':
             return {
                 ...state,
-                showModal:true,
+                showModal: true,
                 isEditing: true,
                 editTaskID:action.payload.id
             };
@@ -34,8 +36,18 @@ export const todoReducer = (state, action) => {
                 isEditing: false,
                 editTaskID:null,
             };
-        case 'SET_SEARCH_TASK':
-            return {...state, searchInput: action.payload};
+        case 'SHOW_ALERT':
+            return {
+                ...state,
+                alert: {
+                    show: true, message: action.payload.message, type: action.payload.type,
+                }
+            }
+        case 'HIDE_ALERT':
+            return {
+                ...state,
+                alert: {...state.alert, show: false}
+            }
         default:
             return state;
     }

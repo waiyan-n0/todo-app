@@ -21,9 +21,16 @@ function InputModal() {
         };
         if(state.isEditing){
             dispatch({type: 'EDITED_TASK', payload: payloadData});
+            dispatch({type: 'MODAL_TOGGLE' });
+            dispatch({type: 'SHOW_ALERT', payload: {message:'TASK EDITED SUCCESSFULLY!', type:'edit'}});
         }else{
             dispatch({type: 'ADD_TASK', payload: payloadData});
+            dispatch({type: 'SHOW_ALERT', payload: {message:'TASK SAVED SUCCESSFULLY!', type:'success'}});
         }
+        setTimeout(() => {
+            dispatch({type: 'HIDE_ALERT'});
+        }, 3000);
+
         dispatch({type: 'MODAL_TOGGLE'});
         setInputTask('');
     };

@@ -8,6 +8,11 @@ const initialState = {
     searchInput: '',
     isEditing: false,
     editTaskID: null,
+    alert: {
+        show: false,
+        message: '',
+        type: '',
+    }
 }
 
 export const Provider = ({ children }) => {
