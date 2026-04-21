@@ -2,7 +2,20 @@ import {useContext} from "react";
 import {Context} from "./Context.jsx";
 
 function Lists(){
-    const {state, dispatch} = useContext(Context)
+    const {state, dispatch} = useContext(Context);
+    const todayDate = new Date().toString().split("T")[0];
+    const filteredByView = state.tasks.filter((task) => {
+        switch (state.currentView) {
+            case 'All': {return task}
+            case 'Today':{ return task.reminder === todayDate;}
+            case 'Upcoming':{ return task.reminder > todayDate;}
+            default: return true;
+        }
+    })
+    const filteredTasks = filteredByView.filter((task) => {
+        return task.tasks.toLowerCase().includes(state.searchInput.toLowerCase());
+    });
+
     const handleDelete = (task) => {
         dispatch({type: 'REMOVE_TASK', payload: task.id});
         dispatch({type: 'SHOW_ALERT', payload:{message:'TASK DELETED SUCCESSFULLY!', type:'delete'}});
@@ -10,11 +23,12 @@ function Lists(){
             dispatch({ type: 'HIDE_ALERT' });
         }, 3000);
     }
+
     return (
         <div >
-            {state.tasks.length === 0 && <p className='py-2'>No Tasks yet. Add one!</p>}
+            {filteredTasks.length === 0 && <p className='py-2'>{state.searchInput? `Does not matched any results with "${state.searchInput}"!` : 'No Tasks yet. Add one!'}</p>}
             <ul className='flex flex-col gap-3 p-8'>
-                {state.tasks.map((task) =>(
+                {filteredTasks.map((task) =>(
                     <li key={task.id} className='flex flex-row items-center justify-between bg-gray-500 rounded-md p-4'>
                         <span className={`flex items-center gap-4 text-gray-700 transition-all ${task.completed ? 'line-through text-gray-400' : ''}`}>
                             <span className={`w-6 h-6 flex items-center justify-center border-2 rounded-md cursor-pointer transition-all duration-20 shrink-0 ${task.completed ? 'bg-white shadow-md' : ''}`}
@@ -49,15 +63,15 @@ function Lists(){
                                 <svg className="w-6 h-6 text-gray-800 dark:text-blue-800" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="2"
                                           d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                 </svg>
                             </button>
                             <button className='cursor-pointer'
                                     onClick={()=>handleDelete(task)}>
                                 <svg className="w-6 h-6 text-gray-800 dark:text-red-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
                                 </svg>
                             </button>
                         </div>

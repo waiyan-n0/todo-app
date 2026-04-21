@@ -4,6 +4,7 @@ import {todoReducer} from './todoReducer.js'
 export const Context  = createContext();
 const initialState = {
     tasks: [],
+    currentView: 'All',
     showModal: false,
     searchInput: '',
     isEditing: false,

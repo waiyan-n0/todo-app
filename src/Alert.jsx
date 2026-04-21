@@ -12,16 +12,16 @@ function Alert() {
     return (
 
         <div
-            className={`w-full flex items-center justify-center top-5 z-50 mt-2 px-6 p-2 border-2 rounded-xl shadow-2xl animate-bounce-in gap-3 ${bgColors[state.alert.type]}`}>
+            className={`fixed flex items-center justify-center top-5 z-50 mt-2 px-6 p-2 border-2 rounded-xl shadow-2xl animate-bounce-in gap-3 ${bgColors[state.alert.type]}`}>
             <span>
                 {state.alert.type === 'success'}
                 {state.alert.type === 'edit'}
                 {state.alert.type === 'delete'}
             </span>
             <span className='flex items-center p-2 gap-2 justify-center'>
-                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                         d="M5 11.917 9.724 16.5 19 7.5"/>
                 </svg>
                 {state.alert.message}</span>
