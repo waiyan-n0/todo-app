@@ -16,6 +16,7 @@ function InputModal() {
         const payloadData = {
             id: state.isEditing ? state.editTaskID : Date.now(),
             tasks: inputTask,
+            category: state.isCategoryView ? state.currentView : 'General',
             reminder: reminder,
             completed: state.isEditing?taskToEdit.completed : false,
         };

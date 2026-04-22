@@ -17,7 +17,7 @@ function App() {
               <Alert />
           </div>
           <main className="flex flex-row w-full">
-              <aside className='border-r border-[var(--border)] h-screen sticky top-0'>
+              <aside className='bg-gray-900/50 border-r border-[var(--border)] h-screen sticky top-0'>
                   <Sidebar/>
               </aside>
               <div className='w-full'>

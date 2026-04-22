@@ -10,6 +10,8 @@ function Lists(){
             case 'All': {return true}
             case 'Today':{ return taskDate === todayDate;}
             case 'Upcoming':{ return taskDate > todayDate;}
+            case 'Personal': return task.category === 'Personal';
+            case 'Work': return task.category === 'Work';
             default: return true;
         }
     })
@@ -29,6 +31,7 @@ function Lists(){
         <div >
             {filteredTasks.length === 0 && <p className='py-2'>{state.searchInput? `Does not matched any results with "${state.searchInput}"!` : 'No Tasks yet. Add one!'}</p>}
             <ul className='flex flex-col gap-3 p-8'>
+                <div className={`text-left`}>{state.currentView} Tasks</div>
                 {filteredTasks.map((task) =>(
                     <li key={task.id} className='flex flex-row items-center justify-between bg-gray-500 rounded-md p-4'>
                         <span className={`flex items-center gap-4 text-gray-700 transition-all ${task.completed ? 'line-through text-gray-400' : ''}`}>

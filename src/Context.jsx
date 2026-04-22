@@ -5,6 +5,7 @@ export const Context  = createContext();
 const initialState = {
     tasks: [],
     currentView: 'All',
+    isCategoryView: false,
     showModal: false,
     searchInput: '',
     isEditing: false,

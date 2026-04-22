@@ -1,7 +1,9 @@
 export const todoReducer = (state, action) => {
     switch (action.type) {
         case 'SET_VIEW':
-            return {...state, currentView: action.payload};
+            return {...state, currentView: action.payload, isCategoryView: false};
+        case 'SET_CATEGORY_VIEW':
+            return {...state, currentView: action.payload, isCategoryView: true};
         case 'SET_SEARCH_TASK':
             return {...state, searchInput: action.payload};
         case 'ADD_TASK':

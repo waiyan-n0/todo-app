@@ -8,7 +8,7 @@ function Sidebar(){
 
     return (
         <div
-            className={`flex flex-col bg-gray-900/50 backdrop-blur-md text-gray-300 p-6 space-y-8 border-r border-gray-800 text-left`}>
+            className={`flex flex-col backdrop-blur-md text-gray-300 p-6 space-y-8 border-r border-gray-800 text-left`}>
             <div className='flex flex-row items-center'>
                 <h1 className={`sm:block text-2xl font-bold text-white ${isExpanded ? 'block' : 'hidden'}`}>
                     Menu
@@ -26,7 +26,7 @@ function Sidebar(){
                 <p>Tasks</p>
                 <div className='flex flex-col gap-1 '>
                     <span
-                        className={`group flex gap-2 font-semibold px-2 py-1 opacity-70 text-sm cursor-pointer hover:bg-sky-500/10 hover:text-sky-400 shadow-[inset_0_0_10px_rgba(14,165,233,0.1)] ${state.currentView === 'All' ? 'bg-sky-500/20 text-sky-400 opacity-100' : 'opacity-70'}`}
+                        className={`group flex gap-2 font-semibold px-2 py-1 opacity-70 text-sm cursor-pointer hover:bg-sky-500/10 hover:text-sky-400 ${state.currentView === 'All' ? 'bg-sky-500/20 text-sky-400 opacity-100' : 'opacity-70'}`}
                         onClick={() => dispatch({type: 'SET_VIEW', payload: 'All'})}>
                         <svg
                             className="w-6 h-6 shrink-0 text-gray-800 dark:text-white transition-transform duration-200 group-hover:scale-110"
@@ -38,7 +38,7 @@ function Sidebar(){
                         <span className={`${isExpanded ? 'block' : 'hidden'} sm:block font-medium text-sm whitespace-nowrap`}>All</span>
                     </span>
                     <span
-                        className={`group flex gap-2 font-semibold px-2 py-1 opacity-70 text-sm cursor-pointer hover:bg-sky-500/10 hover:text-sky-400 shadow-[inset_0_0_10px_rgba(14,165,233,0.1)] ${state.currentView === 'Today' ? 'bg-sky-500/20 text-sky-400 opacity-100' : 'opacity-70'}`}
+                        className={`group flex gap-2 font-semibold px-2 py-1 opacity-70 text-sm cursor-pointer hover:bg-sky-500/10 hover:text-sky-400 ${state.currentView === 'Today' ? 'bg-sky-500/20 text-sky-400 opacity-100' : 'opacity-70'}`}
                         onClick={() => dispatch({type: 'SET_VIEW', payload: 'Today'})}>
                         <svg className="w-6 h-6 shrink-0 text-gray-800 dark:text-white" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@ function Sidebar(){
                         <span className={`${isExpanded ? 'block' : 'hidden'} sm:block font-medium text-sm whitespace-nowrap`}>Today</span>
                     </span>
                     <span
-                        className={`group flex gap-2 font-semibold px-2 py-1 opacity-70 text-sm cursor-pointer hover:bg-sky-500/10 hover:text-sky-400 shadow-[inset_0_0_10px_rgba(14,165,233,0.1)] ${state.currentView === 'Upcoming' ? 'bg-sky-500/20 text-sky-400 opacity-100' : 'opacity-70'}`}
+                        className={`group flex gap-2 font-semibold px-2 py-1 opacity-70 text-sm cursor-pointer hover:bg-sky-500/10 hover:text-sky-400 ${state.currentView === 'Upcoming' ? 'bg-sky-500/20 text-sky-400 opacity-100' : 'opacity-70'}`}
                         onClick={() => dispatch({type: 'SET_VIEW', payload: 'Upcoming'})}>
                         <svg
                             className="w-6 h-6 shrink-0 text-gray-800 dark:text-white transition-transform duration-200 group-hover:scale-110"
@@ -62,9 +62,9 @@ function Sidebar(){
                 </div>
             </div>
             <div className='flex flex-col gap-1'>
-                <p>Lists</p>
+                <p>Notes</p>
                 <div className='flex flex-col gap-1'>
-                    <span
+                    <span onClick={()=> dispatch({type:'SET_CATEGORY_VIEW', payload: 'Personal'})}
                         className={`group flex gap-2 font-semibold px-2 py-1 opacity-70 text-sm cursor-pointer hover:bg-sky-500/10 hover:text-sky-400 shadow-[inset_0_0_10px_rgba(14,165,233,0.1)`}>
                         <svg
                             className="w-6 h-6 shrink-0 text-gray-800 dark:text-white transition-transform duration-200 group-hover:scale-110"
@@ -77,7 +77,7 @@ function Sidebar(){
                         </svg>
                         <span className={`${isExpanded ? 'block' : 'hidden'} sm:block font-medium text-sm whitespace-nowrap`}>Personal</span>
                     </span>
-                    <span
+                    <span onClick={()=> dispatch({type:'SET_CATEGORY_VIEW', payload: 'Work'})}
                         className={`group flex gap-2 font-semibold px-2 py-1 opacity-70 text-sm cursor-pointer hover:bg-sky-500/10 hover:text-sky-400 shadow-[inset_0_0_10px_rgba(14,165,233,0.1)`}>
                         <svg
                             className="w-6 h-6 shrink-0 text-gray-800 dark:text-white transition-transform duration-200 group-hover:scale-110"
