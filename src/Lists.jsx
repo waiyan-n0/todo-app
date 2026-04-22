@@ -3,12 +3,13 @@ import {Context} from "./Context.jsx";
 
 function Lists(){
     const {state, dispatch} = useContext(Context);
-    const todayDate = new Date().toString().split("T")[0];
+    const todayDate = new Date().toISOString().split("T")[0];
     const filteredByView = state.tasks.filter((task) => {
+        const taskDate = task.reminder ? task.reminder.split("T")[0] : "";
         switch (state.currentView) {
-            case 'All': {return task}
-            case 'Today':{ return task.reminder === todayDate;}
-            case 'Upcoming':{ return task.reminder > todayDate;}
+            case 'All': {return true}
+            case 'Today':{ return taskDate === todayDate;}
+            case 'Upcoming':{ return taskDate > todayDate;}
             default: return true;
         }
     })
@@ -39,10 +40,10 @@ function Lists(){
                                         </svg>
                                     )}
                             </span>
-                            <div>
+                            <div className='flex flex-col text-left'>
                                 <span className='text-white'>{task.tasks}</span>
                                 {task.reminder && (
-                                    <span className='flex flex-row items-center gap-1 text-gray-400 text-sm font-semibold'>
+                                    <span className='flex flex-row items-center gap-1 text-gray-400 font-semibold text-xs sm:text-base'>
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>

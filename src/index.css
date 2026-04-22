@@ -62,7 +62,6 @@ body {
   padding: 0;
   text-align: center;
   display: flex;
-  flex-direction: column;
   box-sizing: border-box;
 }
 

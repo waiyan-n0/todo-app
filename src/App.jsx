@@ -13,13 +13,13 @@ function App() {
 
   return (
       <>
-          <div className='flex justify-center'>
+          <div className='fixed top-0 left-0 w-full flex justify-center z-50 pointer-events-none'>
               <Alert />
           </div>
-          <main className="flex flex-row pb-24 ">
-              <div className='flex w-1/4 p-4 justify-center'>
+          <main className="flex flex-row w-full">
+              <aside className='border-r border-[var(--border)] h-screen sticky top-0'>
                   <Sidebar/>
-              </div>
+              </aside>
               <div className='w-full'>
                   <h1 className='flex px-8 text-3xl font-bold my-4'>Tasks</h1>
                   <Search/>
