@@ -7,11 +7,12 @@ function Lists(){
     const filteredByView = state.tasks.filter((task) => {
         const taskDate = task.reminder ? task.reminder.split("T")[0] : "";
         switch (state.currentView) {
-            case 'All': {return true}
-            case 'Today':{ return taskDate === todayDate;}
-            case 'Upcoming':{ return taskDate > todayDate;}
-            case 'Personal': return task.category === 'Personal';
-            case 'Work': return task.category === 'Work';
+            case 'All': {return !task.completed}
+            case 'Today':{ return taskDate === todayDate && !task.completed;}
+            case 'Upcoming':{ return taskDate > todayDate && !task.completed;}
+            case 'Personal': return task.category === 'Personal' && !task.completed;
+            case 'Work': return task.category === 'Work' && !task.completed;
+            case 'Completed': return task.completed ===true;
             default: return true;
         }
     })
@@ -26,7 +27,10 @@ function Lists(){
             dispatch({ type: 'HIDE_ALERT' });
         }, 3000);
     }
-
+    const handleCompleted = (task) => {
+        dispatch({type: 'COMPLETE_TASK', payload: task});
+        dispatch({type: 'SHOW_ALERT', payload: {message:'TASK MARKED AS COMPLETED SUCCESSFULLY!', type:'complete'}});
+    }
     return (
         <div >
             {filteredTasks.length === 0 && <p className='py-2'>{state.searchInput? `Does not matched any results with "${state.searchInput}"!` : 'No Tasks yet. Add one!'}</p>}
@@ -36,7 +40,7 @@ function Lists(){
                     <li key={task.id} className='flex flex-row items-center justify-between bg-gray-500 rounded-md p-4'>
                         <span className={`flex items-center gap-4 text-gray-700 transition-all ${task.completed ? 'line-through text-gray-400' : ''}`}>
                             <span className={`w-6 h-6 flex items-center justify-center border-2 rounded-md cursor-pointer transition-all duration-20 shrink-0 ${task.completed ? 'bg-white shadow-md' : ''}`}
-                                  onClick={() => dispatch({type: 'COMPLETE_TASK', payload: task})}>
+                                  onClick={()=>handleCompleted(task)}>
                                     {task.completed && (
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-black" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>

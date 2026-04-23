@@ -29,8 +29,11 @@ export const todoReducer = (state, action) => {
         case 'COMPLETE_TASK':
             return {
                 ...state,
-                tasks: state.tasks.map(item=>
-                item.id === action.payload.id ? {...item, completed:!item.completed}: item)
+                tasks: state.tasks.map(item=> item.id === action.payload.id ? {
+                    ...item,
+                    completed:!item.completed,
+                    completedAt: !item.completed?new Date().toISOString() : null
+                }: item)
             }
         case 'MODAL_TOGGLE':
             return {

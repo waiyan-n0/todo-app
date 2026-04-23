@@ -8,6 +8,7 @@ function Alert() {
         success: 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400',
         edit: 'bg-sky-500/20 border-sky-500/50 text-sky-400',
         delete: 'bg-rose-500/20 border-rose-500/50 text-rose-400',
+        complete: 'bg-sky-500/20 border-sky-500/50 text-sky-400',
     };
     return (
 
@@ -17,6 +18,7 @@ function Alert() {
                 {state.alert.type === 'success'}
                 {state.alert.type === 'edit'}
                 {state.alert.type === 'delete'}
+                {state.alert.type === 'complete'}
             </span>
             <span className='flex items-center p-2 gap-2 justify-center'>
                 <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
