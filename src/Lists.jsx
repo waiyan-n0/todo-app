@@ -29,13 +29,19 @@ function Lists(){
     }
     const handleCompleted = (task) => {
         dispatch({type: 'COMPLETE_TASK', payload: task});
-        dispatch({type: 'SHOW_ALERT', payload: {message:'TASK MARKED AS COMPLETED SUCCESSFULLY!', type:'complete'}});
-    }
+        const alertMsg = !task.completed?'TASK MARKED AS COMPLETED!':'TASK RESTORE SUCCESSFULLY!';
+        dispatch({type:'SHOW_ALERT', payload: {message: alertMsg, type:'complete'}});
+        setTimeout(() => {
+            dispatch({type: 'HIDE_ALERT'});
+        },3000)
+    };
     return (
         <div >
             {filteredTasks.length === 0 && <p className='py-2'>{state.searchInput? `Does not matched any results with "${state.searchInput}"!` : 'No Tasks yet. Add one!'}</p>}
             <ul className='flex flex-col gap-3 p-8'>
-                <div className={`text-left`}>{state.currentView} Tasks</div>
+                <div className={`text-left flex gap-2 items-center`}>{state.currentView} Tasks
+                    {(state.currentView==='Completed') && <span className={`text-sm text-red-500 opacity-70 blink-text font-semibold`}>(Completed tasks will be deleted in next 24 hours!)</span>}
+                </div>
                 {filteredTasks.map((task) =>(
                     <li key={task.id} className='flex flex-row items-center justify-between bg-gray-500 rounded-md p-4'>
                         <span className={`flex items-center gap-4 text-gray-700 transition-all ${task.completed ? 'line-through text-gray-400' : ''}`}>

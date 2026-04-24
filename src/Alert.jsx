@@ -14,19 +14,14 @@ function Alert() {
 
         <div
             className={`fixed flex items-center justify-center top-5 z-50 mt-2 px-6 p-2 border-2 rounded-xl shadow-2xl animate-bounce-in gap-3 ${bgColors[state.alert.type]}`}>
-            <span>
-                {state.alert.type === 'success'}
-                {state.alert.type === 'edit'}
-                {state.alert.type === 'delete'}
-                {state.alert.type === 'complete'}
-            </span>
             <span className='flex items-center p-2 gap-2 justify-center'>
                 <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                      width="24" height="24" fill="none" viewBox="0 0 24 24">
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                         d="M5 11.917 9.724 16.5 19 7.5"/>
                 </svg>
-                {state.alert.message}</span>
+                {state.alert.message}
+            </span>
         </div>
     )
 }
