@@ -9,8 +9,12 @@ This project serves as a practical application of React.js concepts, focusing on
 ✅ Smart Reminder System: Set specific dates and times for tasks with an integrated date-time picker.
 
 ✅ Responsive Layout: Optimized for 💻 Laptops and 📱 Mobile screens.
+
+❗ Performance: Backend as a firebase, the database response are not fast. And the code are not clean as i expected and i'm going to refine the code. 
 ## Tech Stack
 Frontend: React.js (Vite)
+
+Backend: Firebase
 
 Styling: Tailwind CSS
 
@@ -20,9 +24,7 @@ State: React Context API + useReducer + useRef
 ## 🚧 Roadmap (Work in Progress)
 I am actively developing this project with the following milestones in mind:
 
-Local Storage Persistence: Implementing browser storage so data remains after a page refresh.
-
-Database Integration: Integrating a backend (Firebase or SQL) to provide persistent user data.
+Database Integration: Integrating a backend (Firebase) to provide persistent user data.
 
 PWA Support: Turning the app into a Progressive Web App for mobile installation.
 
