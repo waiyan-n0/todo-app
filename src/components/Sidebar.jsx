@@ -1,14 +1,20 @@
 import {useContext, useState} from "react";
 import {Context} from "./Context.jsx";
+import { signOut } from "firebase/auth";
+import { auth } from "./../firebaseConfig";
 
 function Sidebar(){
     const {state,   dispatch} = useContext(Context);
     const [isExpanded, setIsExpanded] = useState(false);
     const toggleSidebar = () => setIsExpanded(!isExpanded);
-
+    const handleLogout = () => {
+        signOut(auth).then(() => {
+        dispatch({type: 'SHOW_ALERT', payload: {message:'SIGN OUT SUCCESSFULLY!', type:'success'}});
+            console.log("Signed Out");
+        });
+    };
     return (
-        <div
-            className={`flex flex-col backdrop-blur-md text-gray-300 p-6 space-y-8 border-r border-gray-800 text-left`}>
+        <div className={`flex flex-col backdrop-blur-md text-gray-300 p-6 space-y-8 border-r border-gray-800 text-left`}>
             <div className='flex flex-row items-center'>
                 <h1 className={`sm:block text-2xl font-bold text-white ${isExpanded ? 'block' : 'hidden'}`}>
                     Menu
@@ -107,6 +113,16 @@ function Sidebar(){
                         <span className={`${isExpanded ? 'block' : 'hidden'} sm:block font-medium text-sm whitespace-nowrap`}>Completed</span>
                     </span>
                 </div>
+            </div>
+            <div className='flex flex-col gap-1'>
+                <span onClick={handleLogout} className={`group flex gap-2 font-semibold px-2 py-1 opacity-70 text-sm cursor-pointer hover:bg-sky-500/10 hover:text-sky-400 shadow-[inset_0_0_10px_rgba(14,165,233,0.1) ${state.currentView === 'Completed' ? 'bg-sky-500/20 text-sky-400 opacity-100' : 'opacity-70'}`}>
+                    <p>Logout</p>
+                    <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                          d="M18 18V6h-5v12h5Zm0 0h2M4 18h2.5m3.5-5.5V12M6 6l7-2v16l-7-2V6Z"/>
+                </svg>
+                </span>
             </div>
         </div>
     );

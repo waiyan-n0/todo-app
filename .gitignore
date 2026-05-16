@@ -36,9 +36,4 @@ build/
 *.swp
 *.swo
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-.DS_Store
 Thumbs.db

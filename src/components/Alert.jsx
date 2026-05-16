@@ -1,8 +1,14 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {Context} from "./Context.jsx";
 
 function Alert() {
-    const {state} = useContext(Context);
+    const {state,dispatch} = useContext(Context);
+    useEffect(()=>{
+        if(state.alert?.show){
+            const timer = setTimeout(()=> dispatch({type:'HIDE_ALERT'}),3000);
+            return () => clearTimeout(timer);
+        }
+    },[state.alert?.show, dispatch]);
     if (!state.alert || !state.alert.show) return null;
     const bgColors = {
         success: 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400',

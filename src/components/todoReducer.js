@@ -1,5 +1,7 @@
 export const todoReducer = (state, action) => {
     switch (action.type) {
+        case 'SET_TASKS':
+            return { ...state, tasks: action.payload };
         case 'SET_VIEW':
             return {...state, currentView: action.payload, isCategoryView: false};
         case 'SET_CATEGORY_VIEW':
@@ -9,7 +11,9 @@ export const todoReducer = (state, action) => {
         case 'ADD_TASK':
             return {...state,tasks:[action.payload, ...state.tasks]};
         case 'REMOVE_TASK':
-            return {...state, tasks:state.tasks.filter(task => task.id !== action.payload)};
+            return state;
+        case 'COMPLETE_TASK':
+            return state;
         case 'START_EDIT_TASK':
             return {
                 ...state,
@@ -26,15 +30,6 @@ export const todoReducer = (state, action) => {
                 isEditing: false,
                 editTaskID:null
             };
-        case 'COMPLETE_TASK':
-            return {
-                ...state,
-                tasks: state.tasks.map(item=> item.id === action.payload.id ? {
-                    ...item,
-                    completed:!item.completed,
-                    completedAt: !item.completed?new Date().toISOString() : null
-                }: item)
-            }
         case 'MODAL_TOGGLE':
             return {
                 ...state,

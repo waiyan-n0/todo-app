@@ -1,7 +1,10 @@
 import {useContext, useEffect, useState} from "react";
 import {Context} from "./Context.jsx";
+import { db, auth } from "../firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
 
 function InputModal() {
+    const user = auth.currentUser;
     const {state, dispatch, inputRef, datetimeRef} = useContext(Context);
     const taskToEdit = state.tasks.find(t => t.id === state.editTaskID);
     const [inputTask, setInputTask] = useState(state.isEditing ? taskToEdit?.tasks || "" : "");
@@ -11,8 +14,11 @@ function InputModal() {
         if(inputRef.current) inputRef.current.focus();
     },[inputRef])
 
-    const handleSave = () => {
+    const handleSave = async() => {
         if(!inputTask.trim()) return;
+        if(!user){
+            dispatch({type: 'SHOW_ALERT',payload:{message:"Please Login First!",type: "delete"}});
+        }
         const payloadData = {
             id: state.isEditing ? state.editTaskID : Date.now(),
             tasks: inputTask,
@@ -20,18 +26,21 @@ function InputModal() {
             reminder: reminder,
             completed: state.isEditing?taskToEdit.completed : false,
         };
-        if(state.isEditing){
-            dispatch({type: 'EDITED_TASK', payload: payloadData});
-            dispatch({type: 'MODAL_TOGGLE' });
-            dispatch({type: 'SHOW_ALERT', payload: {message:'TASK EDITED SUCCESSFULLY!', type:'edit'}});
-        }else{
-            dispatch({type: 'ADD_TASK', payload: payloadData});
-            dispatch({type: 'SHOW_ALERT', payload: {message:'TASK SAVED SUCCESSFULLY!', type:'success'}});
+        try{
+            if(state.isEditing){
+                dispatch({type: 'EDITED_TASK', payload: payloadData});
+                dispatch({type: 'MODAL_TOGGLE' });
+                dispatch({type: 'SHOW_ALERT', payload: {message:'TASK EDITED SUCCESSFULLY!', type:'edit'}});
+            }else{
+                const addTask = await addDoc(collection(db,"users",user.uid,"tasks"),payloadData)
+                dispatch({type: 'ADD_TASK', payload: payloadData});
+                dispatch({type: 'SHOW_ALERT', payload: {message:'TASK SAVED SUCCESSFULLY!', type:'success'}});
+            }
+        }catch (error){
+            console.error('Error Saving Task: ',error);
+            console.log('error: ',error.code)
+            dispatch({type: 'SHOW_ALERT', payload: {message:'Failed to save!', type:'delete'}});
         }
-        setTimeout(() => {
-            dispatch({type: 'HIDE_ALERT'});
-        }, 3000);
-
         dispatch({type: 'MODAL_TOGGLE'});
         setInputTask('');
     };
